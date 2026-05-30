@@ -1,0 +1,27 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="traceGradient" x1="360" y1="120" x2="840" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFC965"/>
+      <stop offset="0.52" stop-color="#D35B79"/>
+      <stop offset="1" stop-color="#9C0069"/>
+    </linearGradient>
+  </defs>
+  <path d="M250 112H950" stroke="url(#traceGradient)" stroke-width="10"/>
+  <circle cx="600" cy="196" r="31" fill="#050505" stroke="#FFC965" stroke-width="8"/>
+  <circle cx="450" cy="336" r="24" fill="#050505" stroke="#F7F4ED" stroke-width="5"/>
+  <circle cx="600" cy="336" r="24" fill="#050505" stroke="#D35B79" stroke-width="5"/>
+  <circle cx="750" cy="336" r="24" fill="#050505" stroke="#F7F4ED" stroke-width="5"/>
+  <circle cx="376" cy="472" r="20" fill="#050505" stroke="#FFC965" stroke-width="5"/>
+  <circle cx="524" cy="472" r="20" fill="#050505" stroke="#C63383" stroke-width="5"/>
+  <circle cx="676" cy="472" r="20" fill="#050505" stroke="#C63383" stroke-width="5"/>
+  <circle cx="824" cy="472" r="20" fill="#050505" stroke="#9C0069" stroke-width="5"/>
+  <path d="M580 218L470 318" stroke="url(#traceGradient)" stroke-width="5" stroke-linecap="round"/>
+  <path d="M600 226V310" stroke="url(#traceGradient)" stroke-width="5" stroke-linecap="round"/>
+  <path d="M620 218L730 318" stroke="url(#traceGradient)" stroke-width="5" stroke-linecap="round"/>
+  <path d="M438 358L386 452" stroke="#F7F4ED" stroke-opacity="0.76" stroke-width="4" stroke-linecap="round"/>
+  <path d="M462 358L514 452" stroke="#F7F4ED" stroke-opacity="0.76" stroke-width="4" stroke-linecap="round"/>
+  <path d="M738 358L686 452" stroke="#F7F4ED" stroke-opacity="0.76" stroke-width="4" stroke-linecap="round"/>
+  <path d="M762 358L814 452" stroke="#F7F4ED" stroke-opacity="0.76" stroke-width="4" stroke-linecap="round"/>
+  <text x="600" y="582" fill="#F7F4ED" font-family="Arial, Helvetica, sans-serif" font-size="86" font-weight="700" letter-spacing="4" text-anchor="middle">TRACE</text>
+  <text x="600" y="624" fill="#F7F4ED" fill-opacity="0.72" font-family="Arial, Helvetica, sans-serif" font-size="26" letter-spacing="1.2" text-anchor="middle">Threat Modelling Framework</text>
+</svg>

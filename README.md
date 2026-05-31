@@ -4,6 +4,7 @@ TRACE is a threat modelling methodology for Web3 systems, developed at Oak Secur
 
 This repository contains the current working materials for TRACE:
 
+- `METHODOLOGY.md` - methodology specification and workflow
 - `article/` - long-form research article draft
 - `deck/` - editable PPTX and PDF framework note
 - `assets/logo/` - TRACE logo lockups for dark and bright backgrounds

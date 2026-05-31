@@ -40,6 +40,28 @@ That distinction is important. A checklist can tell you whether known controls e
 
 TRACE is therefore less a template than a working discipline. It asks the reviewer to keep connecting evidence back to the system model: source material, actor assumptions, role permissions, protected assets, critical invariants, and edges where value or control crosses a boundary.
 
+## The Three Pillars of TRACE
+
+TRACE can be used at three levels of Web3 security work: protocols, systems, and organisations. The underlying method stays the same, but the evidence, model objects, and recommendations change depending on what is being assessed.
+
+The first pillar is **TRACE for Protocols**. This is the design-stage use of the methodology. The inputs are white papers, protocol specifications, mechanism descriptions, economic models, governance proposals, audit notes, and, when available, smart contract code. The purpose is to understand what the protocol is supposed to preserve before asking whether the implementation is correct.
+
+At this layer, the most important model objects are assets, invariants, privileged roles, governance powers, value flows, external dependencies, and economic assumptions. A lending protocol, for example, may need to preserve solvency, correct accounting, bounded liquidations, fair oracle usage, and safe upgrade authority. A validator or staking system may need to preserve reward integrity, slashing correctness, quorum assumptions, and resistance to collusion. TRACE for Protocols is where design-level threats, economic failures, governance capture paths, and protocol-specific attack trees become visible.
+
+The second pillar is **TRACE for Systems**. This is the architecture and infrastructure use of the methodology. The inputs are system diagrams, architecture documents, deployment descriptions, cloud accounts, CI/CD flows, infrastructure-as-code, frontend deployment paths, RPC and node topology, monitoring design, dependency maps, and operational runbooks.
+
+At this layer, TRACE asks how the protocol is actually operated. The model follows edges between GitHub, CI/CD, package registries, build artifacts, deployment keys, cloud services, node infrastructure, frontends, DNS, CDNs, relayers, keepers, signers, and monitoring systems. These are the places where ordinary computing systems meet irreversible Web3 actions. A compromised CI job may become a malicious frontend release. A cloud IAM mistake may become a node or RPC integrity issue. A weak deployment path may become a protocol-control problem.
+
+TRACE for Systems also fits naturally with [zero trust architecture](https://csrc.nist.gov/pubs/sp/800/207/final). Zero trust asks teams to avoid implicit trust, make access decisions per request or session, and enforce least privilege based on identity, device, workload, resource, and context. The [CISA Zero Trust Maturity Model](https://www.cisa.gov/resources-tools/resources/zero-trust-maturity-model) gives a useful maturity lens across identity, devices, networks, applications and workloads, and data. TRACE supplies the Web3-specific map needed to decide which access paths matter most. Every TRACE edge becomes a zero trust question: who or what is crossing this boundary, what identity is being asserted, what resource is being reached, what action is being requested, what context changes the risk, and what would happen if this source were already compromised?
+
+The third pillar is **TRACE for Organisations**. This is the operational security use of the methodology. The inputs are discovery workshop findings, individual interviews, access reviews, device and account inventories, custody procedures, incident response plans, vendor relationships, travel and physical security assumptions, support workflows, and the lived operating practices of the team. This is where the formal architecture is tested against how people actually work.
+
+At this layer, the model follows human authority and operational reality: founders, engineers, DevOps, security leads, signers, DAO contributors, validators, contractors, vendors, support staff, and incident responders. It asks which people can influence protected assets and invariants, how those people authenticate, how they recover access, how they approve risky actions, how they coordinate during incidents, and where social, organizational, or procedural failure could become technical compromise.
+
+TRACE for Organisations is especially important in operational security assessments because Web3 companies often depend on small groups of highly privileged people. A laptop compromise, a malicious vendor, an unclear signer ceremony, a rushed incident response, or an informal governance process can create as much risk as a vulnerable contract. The output is not only a list of controls. It is an operational threat model, a ranked set of human and process risks, and a hardening roadmap that connects recommendations back to assets, invariants, roles, and trust boundaries.
+
+These three pillars are often used together. Protocol analysis explains what must remain true. System analysis explains how the protocol is built, deployed, and operated. Organisation analysis explains who can affect the system in practice. For Web3, a useful threat model needs all three views, because failure often crosses from one layer to another.
+
 ## Why Web3 Needed A Different Model
 
 In many traditional systems, the main question is whether an attacker can violate confidentiality, integrity, availability, authentication, authorization, or accountability. Those questions still matter. Frontends, CI/CD pipelines, cloud accounts, signing keys, and privileged admin paths can all fail in familiar ways. [STRIDE](https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-threats) remains useful for these conventional computing components.
@@ -150,3 +172,5 @@ It took years of trial, error, and refinement to get here. We expect it to keep 
 - [6] [Bruce Schneier, "Attack Trees," Dr. Dobb's Journal, December 1999.](https://www.schneier.com/academic/archives/1999/12/attack_trees.html)
 - [7] [Pierre Civit, Seth Gilbert, Vincent Gramoli, Rachid Guerraoui, and Jovan Komatovic, "As easy as ABC: Optimal Accountable Byzantine Consensus is easy!" Journal of Parallel and Distributed Computing, 2023.](https://www.sciencedirect.com/science/article/pii/S0743731523001132)
 - [8] [Leslie Lamport, Robert Shostak, and Marshall Pease, "The Byzantine Generals Problem," ACM Transactions on Programming Languages and Systems, 1982.](https://www.microsoft.com/en-us/research/publication/byzantine-generals-problem/)
+- [9] [NIST, "Zero Trust Architecture," Special Publication 800-207.](https://csrc.nist.gov/pubs/sp/800/207/final)
+- [10] [CISA, "Zero Trust Maturity Model."](https://www.cisa.gov/resources-tools/resources/zero-trust-maturity-model)

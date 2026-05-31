@@ -316,33 +316,76 @@ Required outputs:
 - Open assumptions and unresolved questions
 - Recommended next steps for design, architecture, operations, audit readiness, or incident readiness
 
-## Human-AI Co-Working Model
+## AI Usage and Human Co-Working
 
-TRACE is designed for a human-AI co-working process with explicit decision points.
+TRACE is designed to make AI and human co-working practical, reviewable, and safe. The methodology is deliberately sequential: each phase produces an artifact that can be inspected before the next phase begins. This prevents weak assumptions from being amplified into threat rankings, attack trees, or recommendations.
 
-AI is useful for:
+AI is used as an analysis accelerator, not as an autonomous threat modeller. It is useful for reading large source sets, extracting candidate model objects, checking coverage, proposing STRIDE candidates, drafting attack-tree branches, and maintaining traceability between evidence, model objects, threats, and recommendations.
 
-- Source extraction
-- Candidate component identification
-- Model consistency checks
-- Coverage checks
-- STRIDE prompt generation
-- Attack-tree drafting
-- Traceability support
-- Report drafting
+Senior security reviewers remain responsible for judgement. They approve scope, correct the model, define economic invariants, rank threats, decide which attack paths are plausible, evaluate collusion assumptions, calibrate severity, and approve the final recommendations.
 
-Senior reviewers are required for:
+### AI-Assisted Tasks by Phase
 
-- Scope approval
-- Economic invariant definition
-- Threat classification and ranking
-- Attack-tree plausibility checks
-- Collusion and consensus judgement
-- Severity calibration
-- Recommendation sequencing
-- Final report approval
+| Phase | AI Can Help With | Human Review Required |
+|---|---|---|
+| Scope and source inventory | Summarize available material, identify missing documents, cluster sources by topic | Approve scope, exclusions, and source sufficiency |
+| Source ingestion | Extract candidate components, roles, assets, flows, assumptions, and dependencies | Confirm that extracted items are accurate and relevant |
+| TRACE model construction | Propose model structure, identify inconsistent terminology, link model objects to source evidence | Approve and complement threat actors, roles, assets, invariants, and edges |
+| STRIDE identification | Generate candidate STRIDE threats per component, flow, role, or boundary | Remove weak threats, add missed threats, rank materiality |
+| Attack trees | Draft branches and enabling conditions for top threats | Validate plausibility, feasibility, prerequisites, and missing branches |
+| Collusion inspection | Enumerate actor combinations and dependency patterns | Judge incentives, real-world relationships, governance dynamics, and credible coordination paths |
+| Roadmap and report | Draft summaries, tables, traceability matrices, and mitigation language | Calibrate severity, sequence recommendations, approve final report |
 
-The model should never be treated as complete merely because the source material was processed. Human review is a required part of the methodology.
+### Approval Gates
+
+TRACE uses explicit approval gates:
+
+- The source inventory is approved before modelling begins.
+- The TRACE model is approved before STRIDE expansion.
+- The ranked threat list is approved before attack-tree drafting.
+- Attack trees are approved before recommendations are finalized.
+- Collusion and consensus assumptions are approved by a senior reviewer where relevant.
+- Final recommendations are approved for severity, feasibility, sequencing, and usefulness.
+
+### Evidence and Traceability Requirements
+
+AI-generated outputs should be treated as candidate analysis until they are checked. Each material item should be traceable:
+
+- Model objects should link back to sources or be marked as inferred assumptions.
+- STRIDE threats should link to components, flows, roles, or edges.
+- Attack-tree roots should link to ranked threats.
+- Attack-tree leaves should link to enabling assumptions or concrete system facts.
+- Recommendations should link to threats, attack-tree leaves, assets, invariants, or trust boundaries.
+
+If a claim cannot be traced, it should either be removed, rewritten as an assumption, or recorded as an open question.
+
+### AI Failure Modes to Control
+
+TRACE is designed around common AI failure modes in security analysis:
+
+- Overconfident claims from incomplete source material.
+- Plausible but unsupported architecture assumptions.
+- Generic Web2 threat lists that miss Web3-specific invariants.
+- Underdeveloped economic assumptions.
+- Treating formal permissions as equivalent to operational safety.
+- Missing human, vendor, governance, or signer realities.
+- Attack trees that are structurally elegant but unrealistic.
+- Recommendations that are correct in isolation but impractical in sequence.
+
+The sequential workflow and approval gates exist to catch these issues early.
+
+### When Not to Use AI Output Directly
+
+AI output should not be used directly for:
+
+- Final economic invariant definitions.
+- Final severity ratings.
+- Collusion or governance-capture conclusions.
+- Claims about exploitability without expert validation.
+- Final client recommendations.
+- Public methodology language without human editing.
+
+The model should never be treated as complete merely because the source material was processed. Human review is a required part of TRACE.
 
 ## Output Quality Criteria
 

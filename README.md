@@ -1,9 +1,5 @@
 <p align="center">
-  <img src="assets/logo/trace-logo-attack-tree-framework-on-bright.svg" alt="TRACE Threat Modelling Framework" width="460">
-</p>
-
-<p align="center">
-  Threat modelling for Web3 protocols, systems, and organisations.
+  <img src="assets/header/trace-readme-banner.svg" alt="TRACE Threat Modelling Framework">
 </p>
 
 # TRACE
@@ -16,12 +12,13 @@ This repository contains the current working materials for TRACE:
 - `article/` - long-form research article draft
 - `deck/` - editable PPTX and PDF framework note
 - `assets/logo/` - TRACE logo lockups for dark and bright backgrounds
-- `assets/header/` - transparent header illustration candidates and previews
+- `assets/header/` - README banner, transparent header illustration candidates, and previews
 
 ## Notes
 
 - The logo files are native SVG and have transparent backgrounds unless marked as a preview.
-- Header assets are transparent PNGs. Preview files show how they render on white or dark backgrounds.
+- The README banner is a self-contained SVG designed to render clearly in light and dark GitHub themes.
+- Transparent header PNGs are retained as article or presentation illustration candidates. Preview files show how they render on white or dark backgrounds.
 - The framework deck is included as both editable PowerPoint and exported PDF.
 
 ## License

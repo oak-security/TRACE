@@ -1,3 +1,11 @@
+<p align="center">
+  <img src="assets/logo/trace-logo-attack-tree-framework-on-bright.svg" alt="TRACE Threat Modelling Framework" width="460">
+</p>
+
+<p align="center">
+  Threat modelling for Web3 protocols, systems, and organisations.
+</p>
+
 # TRACE
 
 TRACE is a threat modelling methodology for Web3 systems, developed at Oak Security and intended to be portable across protocol teams, auditors, researchers, and independent security reviewers.

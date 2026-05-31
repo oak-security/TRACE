@@ -8,7 +8,9 @@
 
 # TRACE
 
-TRACE is a threat modelling methodology for Web3 systems, developed at Oak Security and intended to be portable across protocol teams, auditors, researchers, and independent security reviewers.
+TRACE is a threat modelling methodology for modern organisations with heterogeneous, decentralized, cloud-first and remote-first operating environments. It is designed for teams that no longer fit traditional perimeter security models and need a zero trust approach across protocols, systems, and organisations.
+
+TRACE was developed at Oak Security through Web3 security work, where high-value assets, distributed authority, off-chain infrastructure, governance, and human operations are tightly coupled. Its applicability is broader: any organisation with fragmented control paths, high-value digital assets, external dependencies, remote teams, and critical human decision points can use TRACE to build a practical threat model.
 
 This repository contains the current working materials for TRACE:
 

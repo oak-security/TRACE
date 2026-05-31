@@ -1,38 +1,40 @@
-# TRACE: A Threat Modeling Methodology for Web3 Systems
+# TRACE: A Threat Modeling Methodology for Modern Decentralized Organizations
 
-*A practical method for modeling assets, invariants, trust boundaries, value flows, human roles, and collusion in hybrid protocol systems.*
+*A practical method for modeling assets, invariants, trust boundaries, value flows, human roles, and collusion across protocols, systems, and organisations.*
 
 Threat modeling is most useful before a system feels finished. It is the discipline of slowing down early enough to ask: what are we building, what must remain true, who can influence it, and how could it fail in practice?
 
-Mature methods such as [STRIDE](https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-threats) and [PASTA](https://versprite.com/security-resources/risk-based-threat-modeling/) remain useful, and [OWASP's general threat-modeling guidance](https://owasp.org/www-project-threat-model/) still captures the central loop of modeling a system, asking what can go wrong, and deciding what to do about it. Privacy-focused methods such as [LINDDUN](https://linddun.org/) make a similar point from another angle: a threat model is strongest when its taxonomy matches the risk domain being studied. We still use these methods as part of the broader toolbox. But after roughly a decade of working with threat models across security reviews, architecture reviews, operational reviews, and protocol launches, we kept running into the same problem: Web3 systems do not fit neatly into traditional software assumptions.
+Mature methods such as [STRIDE](https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-threats) and [PASTA](https://versprite.com/security-resources/risk-based-threat-modeling/) remain useful, and [OWASP's general threat-modeling guidance](https://owasp.org/www-project-threat-model/) still captures the central loop of modeling a system, asking what can go wrong, and deciding what to do about it. Privacy-focused methods such as [LINDDUN](https://linddun.org/) make a similar point from another angle: a threat model is strongest when its taxonomy matches the risk domain being studied.
 
-Web3 projects combine several difficult risk domains:
+We developed TRACE at Oak Security through Web3 security work. Web3 was a useful proving ground because it combines high-value assets, distributed authority, governance, off-chain infrastructure, cloud operations, signing keys, and human control paths. But the underlying problem is no longer limited to Web3.
 
-- High-value assets are directly controlled by software, keys, governance, or protocol rules.
-- Economic invariants matter as much as technical control flow.
-- On-chain contracts interact with off-chain infrastructure, RPC providers, frontends, indexers, relayers, keepers, validators, cloud systems, and human operators.
-- Privileged roles are distributed across founders, multisigs, DAOs, committees, validators, delegates, vendors, and agents.
-- Collusion and consensus assumptions can be part of the threat surface rather than background governance theory. TRACE's collusion pass is influenced by [Byzantine consensus literature](https://www.microsoft.com/en-us/research/publication/byzantine-generals-problem/) and by [ABC, Accountable Byzantine Consensus](https://www.sciencedirect.com/science/article/pii/S0743731523001132), where accountability means surfacing proof of culpability when agreement fails rather than treating consensus failure as opaque.
+Modern organisations increasingly operate without a clean security perimeter:
 
-Traditional models help, but they tend to emphasize software architecture, application logic, attacker technique, privacy properties, or process maturity. Web3 needs a model that can hold these views together without flattening the protocol into a normal web application or treating economics as an afterthought.
+- High-value assets are controlled by software, identities, keys, workflows, vendors, governance, or automation.
+- Critical invariants may be economic, operational, legal, safety-related, or technical.
+- Cloud systems, SaaS platforms, identity providers, CI/CD, personal devices, APIs, frontends, contractors, and remote teams interact continuously.
+- Privileged roles are distributed across founders, executives, maintainers, administrators, contractors, committees, vendors, delegates, and operators.
+- Collusion, coordination, and approval integrity can be part of the threat surface rather than background process theory.
 
-That became clear through trial and error. Some models were technically precise but missed economic failure modes. Others captured governance and incentives but became too loose to guide security work. The version that proved useful in practice was the one that tied every threat back to something concrete: an actor, a role, an asset, an invariant, or an edge in the system.
+Traditional models help, but they often assume cleaner boundaries than modern organisations actually have. TRACE is built for heterogeneous, decentralized environments where zero trust thinking is necessary, human decision-making matters, and risk often crosses from protocols to systems to organisations.
+
+That became clear through trial and error. Some models were technically precise but missed operational and governance failure modes. Others captured human and organisational risk but became too loose to guide security work. The version that proved useful in practice tied every threat back to something concrete: an actor, a role, an asset, an invariant, or an edge in the system.
 
 That is why we developed **TRACE**.
 
 ## What TRACE Is
 
-TRACE is a Web3 threat modeling methodology developed at Oak Security, but it is not meant to be proprietary jargon. The method is deliberately portable: protocol teams, auditors, researchers, and independent reviewers can use it, adapt it, or challenge it.
+TRACE is a threat modeling methodology developed at Oak Security. It is not meant to be proprietary jargon. The method is deliberately portable: security teams, protocol teams, auditors, researchers, architecture reviewers, operational security teams, and independent reviewers can use it, adapt it, or challenge it.
 
-In practice, TRACE turns heterogeneous protocol material into a structured model, then moves from that model into threat identification, attack trees, collusion analysis, and a prioritized security roadmap.
+In practice, TRACE turns heterogeneous source material into a structured model, then moves from that model into threat identification, attack trees, collusion or coordination analysis, and a prioritized security roadmap.
 
 The acronym stands for:
 
-- **Threat actors**: external attackers, insiders, economic adversaries, governance participants, validators, service providers, compromised users, and other actors with meaningful influence.
-- **Roles**: privileged, operational, governance, signer, maintainer, deployer, administrator, bot, keeper, and emergency-response roles.
-- **Assets**: funds, keys, protocol control, reputation, private data, governance power, uptime, oracle integrity, frontend integrity, validator rewards, and other protected value.
-- **Critical invariants**: economic, protocol, and operational properties that must remain true. In DeFi, this might include solvency, collateralization, fair pricing, liquidation assumptions, accounting consistency, or bounded governance power.
-- **Edges**: trust boundaries, value flows, interfaces, dependencies, off-chain integrations, admin paths, API boundaries, signer paths, and places where control, data, or value crosses domains.
+- **Threat actors**: external attackers, insiders, economic adversaries, governance participants, vendors, service providers, compromised users, and other actors with meaningful influence.
+- **Roles**: privileged, operational, governance, signer, maintainer, deployer, administrator, service owner, emergency-response, and approval roles.
+- **Assets**: funds, keys, credentials, production control, customer data, private data, governance power, uptime, reputation, source code, frontend integrity, and other protected value.
+- **Critical invariants**: business, economic, technical, and operational properties that must remain true. This may include solvency, approval integrity, data integrity, segregation of duties, deployment integrity, bounded authority, or recovery ability.
+- **Edges**: trust boundaries, value flows, interfaces, dependencies, admin paths, API boundaries, signer paths, identity boundaries, and places where control, data, or value crosses domains.
 
 TRACE does not start with a vulnerability checklist. It starts by constructing the system the team believes exists, then testing that model until important failure paths become visible.
 
@@ -42,40 +44,40 @@ TRACE is therefore less a template than a working discipline. It asks the review
 
 ## The Three Pillars of TRACE
 
-TRACE can be used at three levels of Web3 security work: protocols, systems, and organisations. The underlying method stays the same, but the evidence, model objects, and recommendations change depending on what is being assessed.
+TRACE can be used at three levels of security work: protocols, systems, and organisations. The underlying method stays the same, but the evidence, model objects, and recommendations change depending on what is being assessed.
 
-The first pillar is **TRACE for Protocols**. This is the design-stage use of the methodology. The inputs are white papers, protocol specifications, mechanism descriptions, economic models, governance proposals, audit notes, and, when available, smart contract code. The purpose is to understand what the protocol is supposed to preserve before asking whether the implementation is correct.
+The first pillar is **TRACE for Protocols**. A protocol is any formal or semi-formal rule system that governs value, authority, access, coordination, or critical behaviour. In Web3 this might be a smart contract system, validator network, or DAO governance process. In a broader organisation it might be an approval protocol, access workflow, operational process, AI-agent control policy, financial process, or data-sharing agreement. Inputs include white papers, specifications, mechanism descriptions, policy documents, economic or business models, governance proposals, audit notes, and source code or configuration when available.
 
-At this layer, the most important model objects are assets, invariants, privileged roles, governance powers, value flows, external dependencies, and economic assumptions. A lending protocol, for example, may need to preserve solvency, correct accounting, bounded liquidations, fair oracle usage, and safe upgrade authority. A validator or staking system may need to preserve reward integrity, slashing correctness, quorum assumptions, and resistance to collusion. TRACE for Protocols is where design-level threats, economic failures, governance capture paths, and protocol-specific attack trees become visible.
+At this layer, the most important model objects are assets, invariants, privileged roles, governance powers, value flows, external dependencies, and coordination assumptions. TRACE for Protocols is where design-level threats, invariant failures, governance capture paths, and protocol-specific attack trees become visible.
 
-The second pillar is **TRACE for Systems**. This is the architecture and infrastructure use of the methodology. The inputs are system diagrams, architecture documents, deployment descriptions, cloud accounts, CI/CD flows, infrastructure-as-code, frontend deployment paths, RPC and node topology, monitoring design, dependency maps, and operational runbooks.
+The second pillar is **TRACE for Systems**. This is the architecture and infrastructure use of the methodology. The inputs are system diagrams, architecture documents, deployment descriptions, identity provider configuration, cloud accounts, CI/CD flows, infrastructure-as-code, frontend and API deployment paths, dependency maps, monitoring design, and operational runbooks.
 
-At this layer, TRACE asks how the protocol is actually operated. The model follows edges between GitHub, CI/CD, package registries, build artifacts, deployment keys, cloud services, node infrastructure, frontends, DNS, CDNs, relayers, keepers, signers, and monitoring systems. These are the places where ordinary computing systems meet irreversible Web3 actions. A compromised CI job may become a malicious frontend release. A cloud IAM mistake may become a node or RPC integrity issue. A weak deployment path may become a protocol-control problem.
+At this layer, TRACE asks how the target is actually built and operated. The model follows edges between identity providers, GitHub, CI/CD, package registries, build artifacts, deployment keys, cloud services, SaaS platforms, frontends, APIs, DNS, CDNs, automation, monitoring, and operational tools. These are the places where ordinary computing systems meet high-value actions. A compromised CI job may become a malicious release. A cloud IAM mistake may become a production-control issue. A weak deployment path may become an organisational control problem.
 
-TRACE for Systems also fits naturally with [zero trust architecture](https://csrc.nist.gov/pubs/sp/800/207/final). Zero trust asks teams to avoid implicit trust, make access decisions per request or session, and enforce least privilege based on identity, device, workload, resource, and context. The [CISA Zero Trust Maturity Model](https://www.cisa.gov/resources-tools/resources/zero-trust-maturity-model) gives a useful maturity lens across identity, devices, networks, applications and workloads, and data. TRACE supplies the Web3-specific map needed to decide which access paths matter most. Every TRACE edge becomes a zero trust question: who or what is crossing this boundary, what identity is being asserted, what resource is being reached, what action is being requested, what context changes the risk, and what would happen if this source were already compromised?
+TRACE for Systems also fits naturally with [zero trust architecture](https://csrc.nist.gov/pubs/sp/800/207/final). Zero trust asks teams to avoid implicit trust, make access decisions per request or session, and enforce least privilege based on identity, device, workload, resource, and context. The [CISA Zero Trust Maturity Model](https://www.cisa.gov/resources-tools/resources/zero-trust-maturity-model) gives a useful maturity lens across identity, devices, networks, applications and workloads, and data. TRACE supplies the context-specific map needed to decide which access paths matter most. Every TRACE edge becomes a zero trust question: who or what is crossing this boundary, what identity is being asserted, what resource is being reached, what action is being requested, what context changes the risk, and what would happen if this source were already compromised?
 
-The third pillar is **TRACE for Organisations**. This is the operational security use of the methodology. The inputs are discovery workshop findings, individual interviews, access reviews, device and account inventories, custody procedures, incident response plans, vendor relationships, travel and physical security assumptions, support workflows, and the lived operating practices of the team. This is where the formal architecture is tested against how people actually work.
+The third pillar is **TRACE for Organisations**. This is the operational security use of the methodology. The inputs are discovery workshop findings, individual interviews, access reviews, device and account inventories, custody or approval procedures, incident response plans, vendor relationships, travel and physical security assumptions, support workflows, and the lived operating practices of the team. This is where the formal architecture is tested against how people actually work.
 
-At this layer, the model follows human authority and operational reality: founders, engineers, DevOps, security leads, signers, DAO contributors, validators, contractors, vendors, support staff, and incident responders. It asks which people can influence protected assets and invariants, how those people authenticate, how they recover access, how they approve risky actions, how they coordinate during incidents, and where social, organizational, or procedural failure could become technical compromise.
+At this layer, the model follows human authority and operational reality: founders, executives, engineers, DevOps, security leads, approvers, administrators, contractors, vendors, support staff, and incident responders. It asks which people can influence protected assets and invariants, how those people authenticate, how they recover access, how they approve risky actions, how they coordinate during incidents, and where social, organizational, or procedural failure could become technical compromise.
 
-TRACE for Organisations is especially important in operational security assessments because Web3 companies often depend on small groups of highly privileged people. A laptop compromise, a malicious vendor, an unclear signer ceremony, a rushed incident response, or an informal governance process can create as much risk as a vulnerable contract. The output is not only a list of controls. It is an operational threat model, a ranked set of human and process risks, and a hardening roadmap that connects recommendations back to assets, invariants, roles, and trust boundaries.
+TRACE for Organisations is especially important in operational security assessments because decentralized, remote-first organisations often depend on small groups of highly privileged people. A laptop compromise, a malicious vendor, an unclear approval ceremony, a rushed incident response, or an informal governance process can create as much risk as a software vulnerability. The output is not only a list of controls. It is an operational threat model, a ranked set of human and process risks, and a hardening roadmap that connects recommendations back to assets, invariants, roles, and trust boundaries.
 
-These three pillars are often used together. Protocol analysis explains what must remain true. System analysis explains how the protocol is built, deployed, and operated. Organisation analysis explains who can affect the system in practice. For Web3, a useful threat model needs all three views, because failure often crosses from one layer to another.
+These three pillars are often used together. Protocol analysis explains what must remain true. System analysis explains how the target is built, deployed, and operated. Organisation analysis explains who can affect it in practice. A useful threat model needs all three views, because failure often crosses from one layer to another.
 
-## Why Web3 Needed A Different Model
+## Why Modern Organisations Need A Different Model
 
-In many traditional systems, the main question is whether an attacker can violate confidentiality, integrity, availability, authentication, authorization, or accountability. Those questions still matter. Frontends, CI/CD pipelines, cloud accounts, signing keys, and privileged admin paths can all fail in familiar ways. [STRIDE](https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-threats) remains useful for these conventional computing components.
+In many traditional systems, the main question is whether an attacker can violate confidentiality, integrity, availability, authentication, authorization, or accountability. Those questions still matter. Frontends, CI/CD pipelines, cloud accounts, signing keys, SaaS platforms, privileged admin paths, and human approval workflows can all fail in familiar ways. [STRIDE](https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-threats) remains useful for these conventional computing components.
 
-But Web3 adds additional questions that are often just as important:
+But decentralized, cloud-first organisations add questions that are often just as important:
 
-- What economic invariant must never break?
+- What critical invariant must never break?
 - What if a privileged role acts maliciously but within its formal permissions?
-- What if two roles collude?
-- What if a validator, sequencer, oracle, delegate, multisig signer, relayer, or market participant behaves strategically?
-- What if an off-chain dependency fails in a way the on-chain system treats as valid input?
-- What if governance can be captured slowly rather than exploited instantly?
+- What if two roles, vendors, operators, or committees collude?
+- What if an identity provider, cloud service, SaaS platform, automation workflow, or vendor fails in a way another system treats as valid input?
+- What if governance or approval authority can be captured slowly rather than exploited instantly?
+- What if a remote worker, contractor, support process, or recovery path becomes the weakest edge in the model?
 
-These are not always "bugs" in the narrow implementation sense. They are often design-level, operational, or game-theoretic weaknesses. A standard audit may find important code issues, but it may not answer whether assumptions are coherent across people, protocols, infrastructure, and economics.
+These are not always "bugs" in the narrow implementation sense. They are often design-level, operational, governance, or organisational weaknesses. A standard audit may find important code issues, but it may not answer whether assumptions are coherent across people, systems, infrastructure, vendors, and authority paths.
 
 ## The TRACE Flow
 
@@ -83,26 +85,26 @@ TRACE is deliberately sequential. Each stage produces a reviewable artifact, and
 
 The typical flow looks like this:
 
-- **1. Ingest sources.** We gather architecture descriptions, white papers, review notes, protocol documentation, code, configuration, operational procedures, diagrams, interviews, and previous findings.
+- **1. Ingest sources.** We gather architecture descriptions, specifications, white papers, review notes, code, configuration, operational procedures, diagrams, interviews, and previous findings.
 - **2. Construct the TRACE model.** We identify threat actors, roles, assets, critical invariants, and edges. The goal is to map components and connect them to value, permissions, boundaries, and assumptions.
 - **3. Run STRIDE threat identification and ranking.** We apply STRIDE across relevant components, flows, roles, and boundaries. Instead of keeping every imaginable issue, we rank the material threats that deserve deeper analysis.
-- **4. Build attack trees.** For the most important threats, we decompose how they could happen. [Attack trees](https://www.schneier.com/academic/archives/1999/12/attack_trees.html), popularized in security practice by Bruce Schneier, force us to move from a vague concern, such as "oracle manipulation" or "governance capture," into plausible enabling conditions and steps.
-- **5. Inspect collusion and consensus surfaces.** When the system involves DAOs, validators, governance committees, multisigs, sequencers, or other actor sets, we run an optional collusion-focused pass. This looks at combinations of actors, incentive alignment, quorum assumptions, operational dependencies, accountable-fault assumptions, and credible paths to coordinated failure.
-- **6. Produce the roadmap.** The output is a working model: ranked threats, attack trees, mitigation options, open questions, and recommendations for architecture changes, audits, launch readiness, operational hardening, or governance design.
+- **4. Build attack trees.** For the most important threats, we decompose how they could happen. [Attack trees](https://www.schneier.com/academic/archives/1999/12/attack_trees.html), popularized in security practice by Bruce Schneier, force us to move from a vague concern, such as "approval capture" or "deployment compromise," into plausible enabling conditions and steps.
+- **5. Inspect collusion and coordination surfaces.** When the target involves governance bodies, committees, multisigs, validators, vendors, administrators, contractors, or other actor sets, we run an optional coordination-focused pass. This looks at combinations of actors, incentive alignment, quorum assumptions, operational dependencies, accountable-fault assumptions, and credible paths to coordinated failure.
+- **6. Produce the roadmap.** The output is a working model: ranked threats, attack trees, mitigation options, open questions, and recommendations for design changes, architecture changes, operational hardening, assessment readiness, audit readiness, launch readiness, or governance design.
 
-This sequence matters. If you jump straight to attack trees, you may build elegant paths against the wrong assumptions. If you rank threats before identifying economic invariants, you may underestimate protocol-level failures.
+This sequence matters. If you jump straight to attack trees, you may build elegant paths against the wrong assumptions. If you rank threats before identifying critical invariants, you may underestimate the failures that matter most.
 
-It also prevents the model from becoming a bag of disconnected observations. A finding about a frontend, signer, oracle, privileged role, or governance process should be traceable back to the asset or invariant it threatens. Otherwise, the team may fix visible symptoms while leaving the underlying failure path intact.
+It also prevents the model from becoming a bag of disconnected observations. A finding about a frontend, signer, identity provider, vendor, privileged role, or governance process should be traceable back to the asset or invariant it threatens. Otherwise, the team may fix visible symptoms while leaving the underlying failure path intact.
 
 ## Methodology Principles
 
 TRACE works best when a few principles are kept explicit:
 
 - **Model before judging.** Build the system model before deciding which threats matter. Otherwise the analysis tends to mirror whoever spoke most recently or whichever component looks most technical.
-- **Treat invariants as first-class objects.** In Web3, the property that must hold may be economic rather than purely technical. The model needs to capture that property directly.
-- **Separate authority from implementation.** A role can be dangerous even when every permission check works as written. The reviewer asks both: "can this call succeed?" and "what can this actor cause?"
-- **Follow value and control across edges.** Many real failures cross boundaries: contract to frontend, signer to governance, oracle to market, RPC to user, operator to automation.
-- **Rank with context.** Threat ranking should account for feasibility, profitability, incentive compatibility, operational reality, and existing mitigations.
+- **Treat invariants as first-class objects.** In modern organisations, the property that must hold may be business, operational, financial, legal, or technical. The model needs to capture that property directly.
+- **Separate authority from implementation.** A role can be dangerous even when every permission check works as written. The reviewer asks both: "can this action succeed?" and "what can this actor cause?"
+- **Follow value and control across edges.** Many real failures cross boundaries: identity to cloud, CI/CD to deployment, vendor to production, signer to approval, support workflow to account recovery.
+- **Rank with context.** Threat ranking should account for feasibility, profitability or incentive compatibility, operational reality, existing mitigations, and blast radius.
 
 These principles are not complicated, but they are easy to skip under delivery pressure. TRACE makes them hard to skip.
 
@@ -114,15 +116,13 @@ AI is very good at some parts of this work. It can ingest large amounts of mater
 
 That is useful, but only as acceleration. It improves coverage, reduces blank-page friction, and helps keep the model internally consistent.
 
-But AI is only reasonably good at some of the most important Web3 judgment calls. Economic invariants are a good example. The invariant that matters is rarely just "funds should not be lost." It may depend on market assumptions, liquidation dynamics, oracle timing, governance latency, validator behavior, protocol incentives, fee flows, or user behavior during stress. These are areas where senior human input matters most.
+But AI is only reasonably good at some of the most important judgement calls. Critical invariants are a good example. The invariant that matters is rarely just "nothing bad should happen." It may depend on market assumptions, approval dynamics, cloud architecture, incident timing, governance latency, vendor behaviour, operational incentives, or user behaviour during stress. These are areas where senior human input matters most.
 
 The same is true for threat classification and ranking after STRIDE. A model can propose many candidate threats, but deciding which ones are plausible, severe, redundant, speculative, or already mitigated requires expert judgment. Small contextual details can change the answer.
 
-For example: who actually controls the signer? Is the upgrade delay enforceable or merely documented? Does governance have enough participation to make capture expensive? Is an oracle source independent in practice, or only in the diagram? Is the attack profitable under realistic liquidity? These questions are hard to answer from structure alone.
+For example: who actually controls the signer or administrator account? Is the approval delay enforceable or merely documented? Does a committee have enough independence to make capture expensive? Is a vendor dependency independent in practice, or only in the diagram? Is the attack profitable or useful under realistic conditions? These questions are hard to answer from structure alone.
 
-Collusion detection still needs a person in the loop. AI can enumerate actor combinations and suggest dependency patterns, but manual input is needed to understand incentives, relationships, credible coordination paths, and governance or validator realities.
-
-This is where Web3 threat modeling gets especially different from ordinary application threat modeling. A failure path may require two validators, a governance delegate, an oracle dependency, and a timing assumption. Each piece may look acceptable alone. The risk appears in the combination.
+Collusion and coordination detection still need a person in the loop. AI can enumerate actor combinations and suggest dependency patterns, but manual input is needed to understand incentives, relationships, credible coordination paths, and organisational realities.
 
 For that reason, TRACE has explicit human decision points:
 
@@ -130,7 +130,7 @@ For that reason, TRACE has explicit human decision points:
 - The TRACE model is approved and complemented by senior reviewers before threat expansion.
 - STRIDE threat identification and ranking are reviewed before attack-tree work.
 - Attack trees are checked for plausibility, missing branches, and exploitability.
-- Collusion analysis is guided by assumptions about actors and incentives.
+- Collusion or coordination analysis is guided by assumptions about actors and incentives.
 - Final recommendations are reviewed for severity, feasibility, sequencing, and usefulness to the team.
 
 At Oak, we have developed internal tooling to support this workflow: decomposition, traceability, source linkage, coverage checks, STRIDE passes, attack-tree drafting, severity calibration, and report generation. The tooling is deliberately built around review gates. The point is to give the expert a better workbench.
@@ -144,7 +144,7 @@ A good TRACE output should make it easier to answer:
 - Which assets and invariants are most important?
 - Which roles can affect those assets or invariants?
 - Which edges create the most meaningful risk?
-- Which threats are implementation, design, operational, governance, or economic issues?
+- Which threats are implementation, design, operational, governance, vendor, or organisational issues?
 - Which attack paths are plausible enough to justify mitigation?
 - Which risks should be addressed before audit, before launch, or during live operations?
 
@@ -152,15 +152,15 @@ The final model should connect each material threat to the assets, roles, invari
 
 ## Where TRACE Fits
 
-TRACE is not a replacement for audits. It is most useful before audits, between audits, or alongside architecture and operational reviews.
+TRACE is not a replacement for audits, compliance work, or zero trust implementation. It is most useful before audits, between audits, alongside architecture reviews, and in operational security assessments.
 
-Before an audit, TRACE can clarify the design assumptions and high-risk areas reviewers should understand. Before launch, it can help teams decide whether risk is concentrated in code, infrastructure, governance, key management, oracle design, or operations. For live protocols, it provides a structured way to revisit assumptions as integrations, roles, liquidity, governance, and infrastructure evolve.
+Before an audit, TRACE can clarify the design assumptions and high-risk areas reviewers should understand. Before launch, it can help teams decide whether risk is concentrated in code, infrastructure, governance, key management, identity, vendor dependencies, or operations. For live organisations, it provides a structured way to revisit assumptions as teams, vendors, systems, permissions, integrations, and infrastructure evolve.
 
-TRACE is for the parts of protocol security that do not fit cleanly into "find the bug." It is for systems where the question includes whether the implementation is correct, and whether the whole machine behaves safely under pressure.
+TRACE is for the parts of security that do not fit cleanly into "find the bug." It is for environments where the question includes whether the implementation is correct, and whether the whole organisation behaves safely under pressure.
 
-In Web3, assets, incentives, humans, infrastructure, and code are part of the same security model. TRACE is our attempt to model that reality without losing the rigor of traditional threat modeling.
+Modern security reality is made of assets, incentives, humans, infrastructure, vendors, code, and authority paths. TRACE is our attempt to model that reality without losing the rigor of traditional threat modeling.
 
-It took years of trial, error, and refinement to get here. We expect it to keep evolving. But the core belief is stable: in Web3, the best threat models are living models of value, power, assumptions, and failure paths, reviewed by experts, accelerated by AI, and grounded in the specific protocol in front of us.
+It took years of trial, error, and refinement to get here. We expect it to keep evolving. But the core belief is stable: the best threat models are living models of value, power, assumptions, and failure paths, reviewed by experts, accelerated by AI, and grounded in the specific organisation or system in front of us.
 
 ## References and Further Reading
 

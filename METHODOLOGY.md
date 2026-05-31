@@ -1,19 +1,29 @@
 # TRACE Methodology Specification
 
-TRACE is a threat modelling methodology for Web3 systems. It is designed to turn heterogeneous source material into a structured model of assets, roles, invariants, trust boundaries, value flows, and failure paths.
+TRACE is a threat modelling methodology for modern organisations with heterogeneous, decentralized, cloud-first and remote-first operating environments. It is designed for environments where traditional perimeter security models do not describe reality well, and where a zero trust approach is needed across protocols, systems, and organisations.
 
-TRACE can be applied to protocols, technical systems, and organisations. The method is intentionally evidence-driven: every material threat should be traceable back to a source, model object, assumption, boundary, or attack path.
+TRACE turns heterogeneous source material into a structured model of assets, roles, invariants, trust boundaries, value flows, authority paths, and failure paths. The method is evidence-driven: every material threat should be traceable back to a source, model object, assumption, boundary, or attack path.
+
+TRACE was developed through Web3 security work, where high-value assets, distributed authority, governance, infrastructure, and human operations are tightly connected. The method is more general than Web3. It is suitable for organisations with fragmented control paths, remote teams, cloud and SaaS dependency chains, critical human approvals, externally operated systems, and no clear security perimeter.
+
+## Primary Drivers
+
+TRACE is built around three practical realities:
+
+- **No traditional security perimeter.** Modern organisations run across cloud services, SaaS platforms, identity providers, personal devices, contractors, vendors, automation, and public networks.
+- **Three-layer threat modelling.** Meaningful risk often crosses protocols, systems, and organisations, so all three layers must be modelled together.
+- **AI-human co-working.** AI can accelerate extraction, coverage, and draft analysis, but expert human judgement is required for assumptions, ranking, plausibility, collusion analysis, and recommendations.
 
 ## Scope
 
 TRACE is used to answer four practical questions:
 
-- What must the system protect?
+- What must the organisation, system, or protocol protect?
 - Who or what can affect those protected properties?
 - Where does value, control, data, or authority cross a boundary?
 - Which failure paths are plausible enough to change design, architecture, operations, governance, or launch decisions?
 
-TRACE is not a replacement for implementation audits. It is most useful before audits, alongside architecture reviews, during launch readiness work, and in operational security assessments.
+TRACE is not a replacement for implementation audits, compliance assessments, or zero trust architecture work. It is a modelling layer that makes those activities more precise by showing which assets, invariants, roles, edges, and attack paths matter most.
 
 ## Core Model
 
@@ -21,11 +31,11 @@ TRACE stands for:
 
 | Object | Definition | Typical Examples |
 |---|---|---|
-| Threat actors | Actors with capability, incentive, or authority to affect the system | External attackers, insiders, validators, delegates, vendors, governance participants, compromised users |
-| Roles | Privileged or operational positions inside the system | Founders, signers, maintainers, deployers, administrators, operators, responders, keepers |
-| Assets | Value or control that must be protected | Funds, keys, protocol control, governance power, uptime, private data, frontend integrity, validator rewards |
-| Critical invariants | Properties that must remain true | Solvency, collateralization, accounting consistency, bounded governance power, slashing correctness, oracle integrity |
-| Edges | Places where trust, value, data, or control crosses domains | Trust boundaries, value flows, signer paths, API boundaries, admin paths, CI/CD to deployment, governance to execution |
+| Threat actors | Actors with capability, incentive, or authority to affect the target | External attackers, insiders, vendors, contractors, service providers, administrators, delegates, compromised users |
+| Roles | Privileged or operational positions inside the target | Founders, executives, signers, maintainers, deployers, administrators, operators, responders, service owners |
+| Assets | Value, control, data, authority, or continuity that must be protected | Funds, keys, credentials, production control, customer data, uptime, brand trust, source code, governance power |
+| Critical invariants | Properties that must remain true | Segregation of duties, approval integrity, data integrity, financial correctness, bounded authority, deployment integrity, recovery ability |
+| Edges | Places where trust, value, data, or control crosses domains | Trust boundaries, value flows, signer paths, API boundaries, admin paths, CI/CD to deployment, identity provider to cloud |
 
 ```mermaid
 flowchart LR
@@ -55,44 +65,46 @@ flowchart TD
     TRACE --> Systems["TRACE for Systems"]
     TRACE --> Organisations["TRACE for Organisations"]
 
-    Protocols --> PInputs["White papers, protocol specs, mechanism docs, economic models, governance proposals, smart contract code"]
-    Systems --> SInputs["Architecture docs, diagrams, CI/CD, cloud, frontend, RPC/node topology, runbooks"]
-    Organisations --> OInputs["Discovery workshops, interviews, access reviews, custody procedures, incident response, vendor and team practices"]
+    Protocols --> PInputs["Specifications, policies, mechanisms, governance rules, economic models, code"]
+    Systems --> SInputs["Architecture docs, diagrams, cloud, SaaS, identity, CI/CD, deployment, runbooks"]
+    Organisations --> OInputs["Workshops, interviews, access reviews, custody procedures, incident response, vendor and team practices"]
 ```
 
 ### TRACE for Protocols
 
-TRACE for Protocols is used at the design stage.
+TRACE for Protocols is used at the design stage. A protocol is any formal or semi-formal rule system that governs value, authority, access, coordination, or critical behaviour. In Web3 this may be a blockchain protocol, smart contract system, validator network, or governance process. In a broader organisation it may be an approval protocol, access protocol, operational workflow, AI-agent control policy, financial process, data-sharing agreement, or safety-critical business process.
 
 Inputs:
 
 - White papers
 - Protocol specifications
 - Mechanism descriptions
-- Economic models
+- Policy and process specifications
+- Economic or business models
 - Governance proposals
-- Prior audit notes
-- Smart contract code, when available
+- Product and architecture specifications
+- Prior audit or assessment notes
+- Source code or configuration, when available
 
 Primary model focus:
 
 - Protected assets
-- Economic and protocol invariants
-- Governance and upgrade authority
+- Business, economic, technical, and operational invariants
+- Governance and approval authority
 - Privileged protocol roles
-- Value flows
-- Oracle, bridge, sequencer, validator, relayer, or keeper assumptions
-- Collusion and consensus assumptions
+- Value and authority flows
+- External dependencies
+- Collusion, quorum, delegation, and consensus assumptions
 
 Typical outputs:
 
 - Design-level threat model
-- Protocol invariant map
+- Invariant map
 - Governance and privileged-role risk analysis
 - STRIDE threat catalogue by component or flow
 - Attack trees for prominent threats
 - Collusion or consensus-surface analysis where relevant
-- Design and audit-readiness recommendations
+- Design and assessment-readiness recommendations
 
 ### TRACE for Systems
 
@@ -104,24 +116,25 @@ Inputs:
 - Architecture documents
 - Deployment descriptions
 - Cloud account and IAM structure
+- Identity provider and SaaS configuration
 - CI/CD flows
 - Infrastructure-as-code
 - Package registry and dependency information
-- Frontend deployment paths
-- DNS, CDN, RPC, node, relayer, keeper, and validator topology
-- Monitoring, logging, alerting, and incident runbooks
+- Frontend, API, and service deployment paths
+- Network, node, automation, and monitoring topology
+- Logging, alerting, and incident runbooks
 
 Primary model focus:
 
-- Trust boundaries between on-chain and off-chain systems
+- Trust boundaries between internal, cloud, SaaS, vendor, and public systems
 - Build, deploy, and release authority
 - Infrastructure control planes
-- Signer and deployment-key paths
-- Frontend integrity
-- Node, validator, RPC, relayer, and keeper operations
+- Privileged credential and key paths
+- Frontend, API, and data integrity
+- Operational automation
 - Dependency and supply-chain exposure
 
-TRACE for Systems also works naturally with zero trust architecture. Each TRACE edge can be treated as a zero trust question:
+TRACE for Systems works naturally with [zero trust architecture](https://csrc.nist.gov/pubs/sp/800/207/final). Each TRACE edge can be treated as a zero trust question:
 
 - Who or what is crossing this boundary?
 - What identity is being asserted?
@@ -150,7 +163,7 @@ Inputs:
 - Individual interviews
 - Access reviews
 - Device and account inventories
-- Wallet, custody, multisig, MPC, and signer procedures
+- Wallet, custody, signing, approval, and privileged-action procedures
 - Incident response plans
 - Vendor and contractor relationships
 - Travel and physical security assumptions
@@ -162,7 +175,7 @@ Primary model focus:
 - Human authority over assets and invariants
 - Privileged people, groups, and vendors
 - Account recovery and access restoration paths
-- Signer ceremonies and approval workflows
+- Approval workflows and exception paths
 - Incident coordination and decision-making
 - Social, procedural, and organisational failure modes
 
@@ -170,7 +183,7 @@ Typical outputs:
 
 - Operational threat model
 - Human and process risk register
-- Custody and signer risk analysis
+- Custody, approval, and privileged-action risk analysis
 - Incident readiness assessment
 - Vendor and access-risk map
 - 30/60/90-day operational hardening roadmap
@@ -185,7 +198,7 @@ flowchart LR
     Ingest --> Model["2. Construct TRACE model"]
     Model --> STRIDE["3. STRIDE identification and ranking"]
     STRIDE --> Trees["4. Build attack trees"]
-    Trees --> Collusion["5. Collusion and consensus inspection"]
+    Trees --> Collusion["5. Collusion and coordination inspection"]
     Collusion --> Roadmap["6. Roadmap and report"]
 
     Gate0{"Human decision point"} -.-> Ingest
@@ -215,11 +228,11 @@ Extract candidate components, actors, roles, assets, invariants, dependencies, b
 
 Source types may include:
 
-- Protocol specifications
+- Protocol, policy, or process specifications
 - White papers
-- Smart contract code
+- Source code and configuration
 - Architecture diagrams
-- Cloud and deployment descriptions
+- Cloud, SaaS, and deployment descriptions
 - CI/CD configuration
 - Operational procedures
 - Discovery workshop notes
@@ -282,24 +295,23 @@ Attack trees should:
 - Mark required roles, privileges, dependencies, or timing conditions
 - Tie leaves to possible mitigations
 
-### 5. Inspect Collusion and Consensus Surfaces
+### 5. Inspect Collusion and Coordination Surfaces
 
-Run this phase when the system includes DAOs, multisigs, validators, sequencers, governance committees, oracle sets, relayer networks, committees, delegates, or other actor groups whose coordination can affect safety.
+Run this phase when the target includes actor groups whose coordination can affect safety. This may include governance bodies, executive teams, committees, vendors, contractors, administrators, validators, multisigs, external operators, support teams, or service providers.
 
 Inspect:
 
 - Actor combinations
-- Quorum assumptions
-- Threshold assumptions
+- Quorum or threshold assumptions
 - Incentive alignment
 - Governance capture paths
-- Validator or operator coordination
+- Vendor or operator coordination
 - Accountable-fault assumptions
 - Operational dependencies between supposedly independent parties
 
 Approval gate:
 
-- A senior reviewer validates which collusion paths are credible enough to include in the final model.
+- A senior reviewer validates which coordination or collusion paths are credible enough to include in the final model.
 
 ### 6. Produce Roadmap and Report
 
@@ -311,10 +323,10 @@ Required outputs:
 - TRACE model
 - Ranked threat list
 - Attack trees for top threats
-- Collusion and consensus findings, if applicable
+- Collusion and coordination findings, if applicable
 - Mitigation roadmap
 - Open assumptions and unresolved questions
-- Recommended next steps for design, architecture, operations, audit readiness, or incident readiness
+- Recommended next steps for design, architecture, operations, assessment readiness, audit readiness, or incident readiness
 
 ## AI Usage and Human Co-Working
 
@@ -322,7 +334,7 @@ TRACE is designed to make AI and human co-working practical, reviewable, and saf
 
 AI is used as an analysis accelerator, not as an autonomous threat modeller. It is useful for reading large source sets, extracting candidate model objects, checking coverage, proposing STRIDE candidates, drafting attack-tree branches, and maintaining traceability between evidence, model objects, threats, and recommendations.
 
-Senior security reviewers remain responsible for judgement. They approve scope, correct the model, define economic invariants, rank threats, decide which attack paths are plausible, evaluate collusion assumptions, calibrate severity, and approve the final recommendations.
+Senior security reviewers remain responsible for judgement. They approve scope, correct the model, define critical invariants, rank threats, decide which attack paths are plausible, evaluate coordination assumptions, calibrate severity, and approve the final recommendations.
 
 ### AI-Assisted Tasks by Phase
 
@@ -333,7 +345,7 @@ Senior security reviewers remain responsible for judgement. They approve scope, 
 | TRACE model construction | Propose model structure, identify inconsistent terminology, link model objects to source evidence | Approve and complement threat actors, roles, assets, invariants, and edges |
 | STRIDE identification | Generate candidate STRIDE threats per component, flow, role, or boundary | Remove weak threats, add missed threats, rank materiality |
 | Attack trees | Draft branches and enabling conditions for top threats | Validate plausibility, feasibility, prerequisites, and missing branches |
-| Collusion inspection | Enumerate actor combinations and dependency patterns | Judge incentives, real-world relationships, governance dynamics, and credible coordination paths |
+| Collusion and coordination inspection | Enumerate actor combinations and dependency patterns | Judge incentives, real-world relationships, governance dynamics, and credible coordination paths |
 | Roadmap and report | Draft summaries, tables, traceability matrices, and mitigation language | Calibrate severity, sequence recommendations, approve final report |
 
 ### Approval Gates
@@ -344,7 +356,7 @@ TRACE uses explicit approval gates:
 - The TRACE model is approved before STRIDE expansion.
 - The ranked threat list is approved before attack-tree drafting.
 - Attack trees are approved before recommendations are finalized.
-- Collusion and consensus assumptions are approved by a senior reviewer where relevant.
+- Collusion, coordination, and consensus assumptions are approved by a senior reviewer where relevant.
 - Final recommendations are approved for severity, feasibility, sequencing, and usefulness.
 
 ### Evidence and Traceability Requirements
@@ -365,10 +377,10 @@ TRACE is designed around common AI failure modes in security analysis:
 
 - Overconfident claims from incomplete source material.
 - Plausible but unsupported architecture assumptions.
-- Generic Web2 threat lists that miss Web3-specific invariants.
-- Underdeveloped economic assumptions.
+- Generic perimeter-era threat lists that miss distributed authority, remote operations, and critical invariants.
+- Underdeveloped business, economic, or operational assumptions.
 - Treating formal permissions as equivalent to operational safety.
-- Missing human, vendor, governance, or signer realities.
+- Missing human, vendor, governance, approval, or signer realities.
 - Attack trees that are structurally elegant but unrealistic.
 - Recommendations that are correct in isolation but impractical in sequence.
 
@@ -378,9 +390,9 @@ The sequential workflow and approval gates exist to catch these issues early.
 
 AI output should not be used directly for:
 
-- Final economic invariant definitions.
+- Final critical invariant definitions.
 - Final severity ratings.
-- Collusion or governance-capture conclusions.
+- Collusion, coordination, or governance-capture conclusions.
 - Claims about exploitability without expert validation.
 - Final client recommendations.
 - Public methodology language without human editing.
@@ -395,7 +407,7 @@ A TRACE output is acceptable when:
 - Every major asset and invariant is covered by threat identification.
 - Every critical edge is reviewed for trust, authority, and failure assumptions.
 - Top-ranked threats have attack trees or a documented reason why an attack tree is not useful.
-- Collusion and consensus assumptions are inspected where actor groups can coordinate.
+- Collusion, coordination, and consensus assumptions are inspected where actor groups can coordinate.
 - Recommendations are specific enough to change design, architecture, operations, or launch decisions.
 - Open questions and missing evidence are clearly labelled.
 - AI-generated candidates have been reviewed, corrected, and approved by senior reviewers.
@@ -408,9 +420,9 @@ TRACE incorporates and adapts existing threat modelling practices:
 - [Attack trees](https://www.schneier.com/academic/archives/1999/12/attack_trees.html) are used for depth on the most important threats.
 - [PASTA](https://versprite.com/security-resources/risk-based-threat-modeling/) and [OWASP threat modelling guidance](https://owasp.org/www-project-threat-model/) inform the broader risk-analysis flow.
 - [Zero trust architecture](https://csrc.nist.gov/pubs/sp/800/207/final) informs system and operational access-boundary analysis.
-- [Byzantine consensus](https://www.microsoft.com/en-us/research/publication/byzantine-generals-problem/) and [accountable Byzantine consensus](https://www.sciencedirect.com/science/article/pii/S0743731523001132) work inform collusion and consensus-surface inspection.
+- [Byzantine consensus](https://www.microsoft.com/en-us/research/publication/byzantine-generals-problem/) and [accountable Byzantine consensus](https://www.sciencedirect.com/science/article/pii/S0743731523001132) work inform collusion and consensus-surface inspection where distributed actor groups matter.
 
-TRACE is Web3-specific because it treats economic invariants, governance power, signer authority, off-chain infrastructure, human operations, and collusion surfaces as first-class modelling objects.
+TRACE is distinct because it treats critical invariants, distributed authority, cloud and SaaS dependency chains, human operations, and collusion or coordination surfaces as first-class modelling objects.
 
 ## Licensing
 

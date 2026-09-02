@@ -1,5 +1,7 @@
 # TRACE Methodology Specification
 
+Invented, designed, and authored by [Dr. Stefan Beyer](https://www.linkedin.com/in/st-beyer/) at Oak Security.
+
 TRACE is a threat modelling methodology for modern organisations with heterogeneous, decentralized, cloud-first and remote-first operating environments. It is designed for environments where traditional perimeter security models do not describe reality well, and where a zero trust approach is needed across protocols, systems, and organisations.
 
 TRACE turns heterogeneous source material into a structured model of assets, roles, invariants, trust boundaries, value flows, authority paths, and failure paths. The method is evidence-driven: every material threat should be traceable back to a source, model object, assumption, boundary, or attack path.

@@ -12,7 +12,7 @@ You may share, copy, redistribute, adapt, remix, transform, and build upon these
 
 Suggested attribution:
 
-> TRACE threat modeling methodology, developed by Oak Security, licensed under CC BY 4.0.
+> TRACE threat modeling methodology, invented, designed, and authored by [Dr. Stefan Beyer](https://www.linkedin.com/in/st-beyer/) at Oak Security, licensed under CC BY 4.0.
 
 If you modify the materials, indicate that changes were made. Do not imply that Oak Security endorses your modified version, service, publication, training, assessment, certification, or implementation unless Oak Security has agreed to that in writing.
 

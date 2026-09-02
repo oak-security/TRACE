@@ -10,7 +10,7 @@
 
 TRACE is a threat modelling methodology for modern organisations with heterogeneous, decentralized, cloud-first and remote-first operating environments. It is designed for teams that no longer fit traditional perimeter security models and need a zero trust approach across protocols, systems, and organisations.
 
-TRACE was developed at Oak Security through Web3 security work, where high-value assets, distributed authority, off-chain infrastructure, governance, and human operations are tightly coupled. Its applicability is broader: any organisation with fragmented control paths, high-value digital assets, external dependencies, remote teams, and critical human decision points can use TRACE to build a practical threat model.
+TRACE was invented, designed, and authored by [Dr. Stefan Beyer](https://www.linkedin.com/in/st-beyer/) at Oak Security through Web3 security work, where high-value assets, distributed authority, off-chain infrastructure, governance, and human operations are tightly coupled. Its applicability is broader: any organisation with fragmented control paths, high-value digital assets, external dependencies, remote teams, and critical human decision points can use TRACE to build a practical threat model.
 
 This repository contains the current working materials for TRACE:
 
@@ -33,7 +33,7 @@ Except where otherwise noted, the documentation, articles, diagrams, presentatio
 
 Suggested attribution:
 
-> TRACE threat modeling methodology, developed by Oak Security, licensed under CC BY 4.0.
+> TRACE threat modeling methodology, invented, designed, and authored by [Dr. Stefan Beyer](https://www.linkedin.com/in/st-beyer/) at Oak Security, licensed under CC BY 4.0.
 
 The license allows reuse and adaptation with attribution, but it does not grant trademark rights or permission to imply Oak Security endorsement. See `LICENSE.md` and `TRADEMARKS.md`.
 

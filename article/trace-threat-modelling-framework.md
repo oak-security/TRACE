@@ -2,11 +2,13 @@
 
 *A practical method for modeling assets, invariants, trust boundaries, value flows, human roles, and collusion across protocols, systems, and organisations.*
 
+By [Dr. Stefan Beyer](https://www.linkedin.com/in/st-beyer/), inventor, designer, and author of TRACE.
+
 Threat modeling is most useful before a system feels finished. It is the discipline of slowing down early enough to ask: what are we building, what must remain true, who can influence it, and how could it fail in practice?
 
 Mature methods such as [STRIDE](https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-threats) and [PASTA](https://versprite.com/security-resources/risk-based-threat-modeling/) remain useful, and [OWASP's general threat-modeling guidance](https://owasp.org/www-project-threat-model/) still captures the central loop of modeling a system, asking what can go wrong, and deciding what to do about it. Privacy-focused methods such as [LINDDUN](https://linddun.org/) make a similar point from another angle: a threat model is strongest when its taxonomy matches the risk domain being studied.
 
-We developed TRACE at Oak Security through Web3 security work. Web3 was a useful proving ground because it combines high-value assets, distributed authority, governance, off-chain infrastructure, cloud operations, signing keys, and human control paths. But the underlying problem is no longer limited to Web3.
+[Dr. Stefan Beyer](https://www.linkedin.com/in/st-beyer/) developed TRACE at Oak Security through Web3 security work. Web3 was a useful proving ground because it combines high-value assets, distributed authority, governance, off-chain infrastructure, cloud operations, signing keys, and human control paths. But the underlying problem is no longer limited to Web3.
 
 Modern organisations increasingly operate without a clean security perimeter:
 
